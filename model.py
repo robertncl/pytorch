@@ -25,3 +25,12 @@ for _ in range(500):
 # Predict
 with torch.no_grad():
   print(model(torch.tensor([[15.0]], dtype=torch.float32)))
+  
+  # Access the first (and only) layer in the sequential model
+layer = model[0]
+# Get weights and bias
+weights = layer.weight.data.numpy()
+bias = layer.bias.data.numpy()
+print("Weights:", weights)
+print("Bias:", bias)
+ 

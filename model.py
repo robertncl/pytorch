@@ -24,4 +24,4 @@ for _ in range(500):
  
 # Predict
 with torch.no_grad():
-  print(model(torch.tensor([[10.0]], dtype=torch.float32)))
+  print(model(torch.tensor([[15.0]], dtype=torch.float32)))

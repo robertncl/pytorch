@@ -20,19 +20,19 @@ test_loader = DataLoader(test_dataset, batch_size=64,
 # Define the model
 class FashionMNISTModel(nn.Module):
     def __init__(self):
-    super(FashionMNISTModel, self).__init__()
-    self.flatten = nn.Flatten()
-    self.linear_relu_stack = nn.Sequential(
-    nn.Linear(28*28, 128),
-    nn.ReLU(),
-    nn.Linear(128, 10),
-    nn.LogSoftmax(dim=1)
-    )
+        super(FashionMNISTModel, self).__init__()
+        self.flatten = nn.Flatten()
+        self.linear_relu_stack = nn.Sequential(
+            nn.Linear(28*28, 128),
+            nn.ReLU(),
+            nn.Linear(128, 10),
+            nn.LogSoftmax(dim=1)
+        )
  
     def forward(self, x):
-    x = self.flatten(x)
-    logits = self.linear_relu_stack(x)
-    return logits
+        x = self.flatten(x)
+        logits = self.linear_relu_stack(x)
+        return logits
  
 model = FashionMNISTModel()
  
@@ -46,18 +46,17 @@ def train(dataloader, model, loss_fn, optimizer):
     model.train()
     for batch, (X, y) in enumerate(dataloader):
     # Compute prediction and loss
-    pred = model(X)
-    loss = loss_fn(pred, y)
+        pred = model(X)
+        loss = loss_fn(pred, y)
  
-    # Backpropagation
-    optimizer.zero_grad()
-    loss.backward()
-    optimizer.step()
+        # Backpropagation
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
  
-    if batch % 100 == 0:
-    loss, current = loss.item(), batch * len(X)
-    print(f"loss: {loss:>7f}  
-    [{current:>5d}/{size:>5d}]")
+        if batch % 100 == 0:
+            loss, current = loss.item(), batch * len(X)
+            print(f"loss: {loss:>7f}  [{current:>5d}/{size:>5d}]")
  
 # Training process
 epochs = 5
@@ -65,4 +64,3 @@ for t in range(epochs):
     print(f"Epoch {t+1}\n-------------------------------")
     train(train_loader, model, loss_function, optimizer)
 print("Done!")
- 
